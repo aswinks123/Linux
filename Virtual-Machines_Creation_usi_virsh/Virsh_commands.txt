@@ -1,0 +1,34 @@
+To see all VMS
+
+virsh list --all
+
+
+To shutdown VM
+
+sudo virsh shutdown VM-Name
+
+To start VM
+
+sudo  virsh start VM-Name
+
+TO reboot VM
+
+ sudo virsh reboot VM-Name
+ 
+ To Force shut down VM
+ 
+ sudo virsh destroy VM-Name   
+ 
+ To DELETE virtual machine along with its associated storage
+ 
+ sudo virsh undefine VM-name --remove-all-storage
+ 
+ To enable VM auto start
+ 
+ virsh autostart VM-name
+ 
+ To Disable VM auto start
+ 
+ virsh autostart --disable VM-Name
+
+

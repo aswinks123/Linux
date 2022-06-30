@@ -1,0 +1,44 @@
+Managing container
+
+
+# Installing the required container software name: podman
+yum install podman container-tools
+
+#To log in to registry
+
+podman login registry.redhat.io
+
+
+***ALL are normal docker commands***
+Instead of docker give podman
+eg: docker ps  -> podman ps
+----------------------------------------------------------------------
+
+
+#Make container as a Service
+
+podman generate systemd <containername>  > /etc/systemd/system/<our service name>.service
+systemctl daemon-reload
+
+EG: podman generate systemd clever_wozniak > /etc/systemd/system/customhttpd.service
+--------------------------------------------------------------------
+
+#Make container as a Service for a specific user
+
+podman generate systemd <containername>  > /etc/systemd/user/<our service name>.service
+
+
+open /etc/systemd/user/<our service name>.service
+
+Edit this line (wantedBy) to wantedBy=default.service
+
+
+
+
+systemctl --user daemon-reload
+systemctl --user start <service name>
+
+
+
+
+

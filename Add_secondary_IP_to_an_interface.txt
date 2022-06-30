@@ -1,0 +1,28 @@
+# Adding another secondary IP to an interface.
+
+nmcli con show  # TO display the current NW interfaces
+nmcli con modify <interface name> +ipv4.addresses <IPaddress>
+nmcli connection  reload
+nmcli connection show <interface name> # To see full details of interface
+
+
+
+# To add a new connection
+
+nmcli con add con-name "default" type ethernet ifname ens06 ip4 192.168.0.02/24 gw4 192.168.0.1 
+
+
+#To Activate this
+nmcli con up <connection name>
+
+
+#To auto connect at start
+nmcli con mod <con name> connection.autoconnect yes
+
+
+# Chnage IP address from nmcli
+
+nmcli con mod <con-name> ipv4.addresses <IP/CIDR>
+
+# Change DNS
+nmcli con mod <con-name> ipv4.dns <IP>

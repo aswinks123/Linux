@@ -1,0 +1,14 @@
+# Tuning System Settings
+
+-> yum install tuned  # To install tunes software
+
+-> tuned-adm list  # To list all the profiles
+
+-> tuned-adm active  # To show current active profile
+
+
+-> tuned-adm profile balanced  # Set profile as balanced.
+ 
+ -> tuned-adm recommend  # To see the recommended profile
+
+ 

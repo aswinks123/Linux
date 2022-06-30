@@ -1,0 +1,14 @@
+# Remove the following from grub file
+
+vi /etc/default/grub
+
+Remove "rhgb quiet" from this line: GRUB_CMDLINE_LINUX="crashkernel=auto rd.lvm.lv=centos/root rd.lvm.lv=centos/swap rhgb quiet"
+
+
+Then 
+
+Regenerate the grub.conf file
+
+1.grub2-mkconfig -o /boot/grub2/grub.cfg
+
+

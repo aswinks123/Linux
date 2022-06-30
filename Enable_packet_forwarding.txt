@@ -1,0 +1,13 @@
+Verify : cat /proc/sys/net/ipv4/ip_forward
+
+To Enable it:
+
+
+Open /etc/sysctl.conf
+
+Add the following line
+
+net.ipv4.ip_forward=1
+
+
+

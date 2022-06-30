@@ -1,0 +1,34 @@
+fdidk  /dev/sdb   (  selecting the disk)
+
+
+p  ( to print current partition table)
+n   ( for new partition)
+
+choose primary partition
+
+starting :  choose default
+ending  :  +2GB   (for 2 GB partition)
+
+p:  print the latest partition table
+
+w:  To save the changes
+
+
+Formating the Partition
+----------------------------
+
+mkfs.ext4  /dev/sdb1   
+or 
+mkfs.xfs /dev/sdb1
+
+partprobe  :  To update the partition table to kernel
+
+
+MOUNT the file system 
+
+
+
+mount  /dev/sdb1  /folder1
+
+
+

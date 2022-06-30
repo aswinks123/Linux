@@ -1,0 +1,30 @@
+1 : Create an ext4  partition
+
+
+2.Take a backup of current home folder
+->sudo cp -Rp /home/* /mount/location  # take backup to any other location
+
+
+3.Locate UUID of the Disk
+
+->  sudo blkid	 ( note the output)
+
+4.Open fstab and add the following entry
+
+UUID= <UUID of new partition that we created>    /home     ext4     nodev,nosuid     0     2
+
+
+5.Remove old home and add new home folder
+
+cd / && sudo mv /home /home_old && sudo mkdir /home  
+
+
+
+6.Mount /home to new partition 
+
+mount /dev/sdb1  /home  # sdb1 should be changed to the one you have created.
+
+
+7.Reboot the server( It may take few min to reboot)
+
+

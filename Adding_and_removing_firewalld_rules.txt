@@ -1,0 +1,48 @@
+# Adding HTTP and HTTPS to firewalld 
+
+
+# To see the status
+
+firewall-cmd --state
+
+#To open port for service
+
+firewall-cmd --permanent --add-service={http,https}
+
+#To open port 53 in firewall
+
+firewall-cmd --zone=public --add-port=53/tcp --permanent
+
+
+# To see the open ports in firewall
+firewall-cmd --list-all
+
+-------------------------------------------
+EG:
+
+root@redhat ~]# firewall-cmd --list-all
+public (active)
+  target: default
+  icmp-block-inversion: no
+  interfaces: enp0s3
+  sources: 
+  services: dhcpv6-client http https ssh
+  ports: 53/tcp
+  protocols: 
+  masquerade: no
+  forward-ports: 
+  source-ports: 
+  icmp-blocks: 
+  rich rules: 
+--------------------------------------
+
+
+#To reload firewall
+firewall-cmd --reload
+
+------------------------------------------------------------------------------------------
+
+
+CLOSING A PORT IN FIREWALL
+
+firewall-cmd --zone=public --remove-port=53/tcp --permanent

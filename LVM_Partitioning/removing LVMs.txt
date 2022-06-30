@@ -1,0 +1,9 @@
+
+#To remove entire LVM and all LVs,VGs,Pvs
+
+1.Unmount the lvs
+2.lvchange -an <device path>
+3.lvremove <lvpath>
+4.vgremove <vgname>
+5.pvremove <disk path/partition path>
+

@@ -1,0 +1,64 @@
+Autofs
+
+ Mount a share directlry when we require the fies from that directlry.when not in use it will unmount automaically
+
+-------------------------------------------------
+
+IN SERVER SIDE
+
+
+
+Install the application in Server
+
+yum install nfs*
+
+
+#create a folder and give 777 permisson
+
+mkdir /sharepath
+chmod 777 /sharepath
+
+
+#add the following to /etc/exports file
+
+/sharepath   192.168.0.107(ro,sync) # It is the IP address of the clients that you want to conenct
+
+
+#Export if
+
+exportfs -avr
+
+
+#open firewall ports
+firewall-cmd --add-service={nfs,mountd,rpc-bind} --permanent
+
+firewall-cmd --reload
+
+-----------------------------------------------------
+
+IN CLIENT SIDE
+
+
+
+# Show the shared mount of server
+
+showmount -e <IP of server>
+
+
+#Add the share details in client's /etc/auto.master  file
+
+Comment /misc  and add
+/auto_mount /etc/auto.misc
+
+#Open /etc/auto.misc and add
+
+access  -rw,soft,intr	<server IP>:/sharepath name
+
+
+#Enable auto fs
+
+systemctl enable autofs --now
+
+
+
+-----------------------------------------
