@@ -7,11 +7,10 @@ Softlink and hardlink
 
 use ln command
 It is a shorcut to a file.
-if source is removed all shortcut will be invalid
 Hard link cannot link to a directory
 Hard link cannot link to files in another mount
 Hard link will not delete even if original file is removed.
-
+Has same inode number as original file
 
 
 
@@ -22,6 +21,9 @@ ln -s  /tmp/vsftpd.conf  shortcut-vsftps1
 use ln -s command
 
 "If original file is removed softlink will broke"
+can create soft link between different mounts
+has different i node number.
+can link to directories
 
 
 

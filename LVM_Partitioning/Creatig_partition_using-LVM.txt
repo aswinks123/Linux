@@ -1,4 +1,4 @@
-Creatre PV  from the disks
+Create PV  from the disks
 
 ->vcreate /dev/sdb /dev/sdc
 
@@ -9,7 +9,7 @@ Create VG from PV
 Create an LV of 2 GB from VG(myvg)
 
 
-vcreate -n datalv1 -L 2G /dev/myvg
+lvcreate -n datalv1 -L 2G /dev/myvg
 
 
 Finally Mount it to the desired folder...
