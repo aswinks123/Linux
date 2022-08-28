@@ -1,0 +1,39 @@
+Created by Aswin KS
+
+Creating a stratis pool and file systems
+
+The stratis file system automatically extends as the file system gets filled, provided there is still free space in the pool.
+Compared to LVM where one will need to manually extend the Logical volume and the filesystem when it gets filled up.
+Note: This is an important session for RHCSA exam
+
+# Installing software
+dnf install stratisd stratis-cli
+
+
+# Enabling Service
+systemctl enable --now stratisd
+
+#Creating a pool
+stratis pool create <pool-name> <block-device>
+
+#Listing pool
+stratis pool list
+
+
+#Creating a file system in pool
+stratis fs create <poolname> <filesystemname>
+
+
+#Listing file system
+stratis fs list <poolname>
+
+----------------------------
+
+# Adding more disk to pool
+stratis pool add-data <poolname> /<devicepath>
+
+------------------
+REMOVING A POOL
+
+stratis filesystem destroy <poolname> fs-1 fs-2
+stratis pool destroy poolname

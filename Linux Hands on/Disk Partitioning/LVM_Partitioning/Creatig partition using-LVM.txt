@@ -1,0 +1,33 @@
+Created by Aswin KS
+
+How to create a LVM
+
+Step 1
+
+Creatre PV from the disks
+
+->vcreate /dev/sdb /dev/sdc (/dev/sdb and /dev/sdc are disk partitions)
+
+Step 2
+
+Create VG from PV
+
+->vgcreate myvg /dev/sdb /dev/sdc  (myvg is the name of new volume group)
+
+Step 3
+
+Create an LV of 2 GB from VG(myvg)
+
+
+lcreate -n datalv1 -L 2G /dev/myvg  (It create an lv name datalv of size 2GB from myvg volume group)
+
+
+Finally Mount it to the desired folder... (add the entry in /etc/fstab to mount automatically after server restart)
+
+
+
+Note:
+
+PV=Physical Volume
+VG=Volume Group
+LV=Logical Volume

@@ -1,0 +1,70 @@
+#Created by Aswin KS
+
+How to implement : Autofs 
+
+What is autoFs
+
+Mount a share directlry only when we require the fies from that directory.when not in use it will unmount automaically
+
+-------------------------------------------------
+
+SERVER SIDE Configuration
+
+
+
+Install the application in Server
+
+yum install nfs*
+
+
+#Create a folder and give 777 permisson
+
+mkdir /sharepath
+chmod 777 /sharepath
+
+
+#Add the following to /etc/exports file
+
+/sharepath   192.168.0.107(ro,sync) # It is the IP address of the clients that you want to conenct  #Replace 192.168.0.107 with your "client IP"
+
+
+#Export the configuration
+
+exportfs -avr
+
+
+#open firewall ports
+
+firewall-cmd --add-service={nfs,mountd,rpc-bind} --permanent
+
+firewall-cmd --reload
+
+-----------------------------------------------------
+
+CLIENT SIDE Configuration
+
+
+
+# Show the shared mount of server
+
+showmount -e <IP of server>
+
+
+#Add the share details in client's /etc/auto.master  file
+
+Comment /misc line  and then add /auto_mount /etc/auto.misc
+
+
+#Open /etc/auto.misc and add
+
+access  -rw,soft,intr	<server IP>:/sharepath name
+
+
+#Enable auto fs
+
+systemctl enable autofs --now
+
+
+
+-----------------------------------------
+Thankyou

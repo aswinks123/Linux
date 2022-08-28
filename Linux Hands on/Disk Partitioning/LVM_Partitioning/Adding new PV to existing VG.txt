@@ -1,0 +1,10 @@
+Add the disk from VMware/Virtual box
+
+then
+
+Run the command to add the disk to your existing VG
+
+->vgextend myvg /dev/sdd  (  /dev/sdd  is the newly added disk and myvg is the existing VG name)
+
+
+

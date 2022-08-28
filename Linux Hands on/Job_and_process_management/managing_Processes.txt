@@ -1,0 +1,61 @@
+Created by Aswin KS
+
+#managing Processes
+
+Process 1  : init or systemd
+
+CTRL + C  : Termionate the process
+CTRL + Z : Move process to background
+---------
+
+sleep&   :  & will run the process in backgroung
+
+jobs  :  jobs command will show all the jobs running in the background
+
+-------------
+# To bring a process to forgroung
+
+[aswin@redhat ~]$ jobs
+[2]   Running                 sleep 700 &
+[3]-  Running                 sleep 701 &
+[4]+  Running                 sleep 702 &
+
+
+->   fg %3  # it will move 3 rd one to FG
+
+
+------------------------
+
+kill -15 <PID>  : it will terminate the process to terminate state
+kill -9 <PID>	: Straignt Kill the process from table
+
+---------------------------------------------------------------------------
+
+!!  :  will run the previous command
+
+disown -a   : It will run the background even if terminal is closed
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+**NICE and Priorities**
+
+It is used to set priorities to the process
+
+
+Nice value range from 20 to -20
+
+-20 is the highest priority
+
+Root required for -ve values
+
+
+nice -n 2 sleep 100 #set nice to 2
+
+renice -n <new nice value> -p <PID>  #chnage nice of a process
+eg: renice -n 8 -p 108 
+
+renice -n 2 -u <username>  # To set nice value for all process of a user
+
+
+
+

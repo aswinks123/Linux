@@ -1,0 +1,55 @@
+Created by Aswin KS
+
+VDO file system creation
+
+Virtual Data Optimizer (VDO) provides inline data reduction for Linux in the form of deduplication, compression, and thin provisionin
+
+# Installing the package
+
+sudo dnf install kmod-kvdo vdo
+
+# Starting services
+$ sudo systemctl start vdo
+$ sudo systemctl enable vdo
+$ sudo systemctl status vdo
+
+
+# Creating a VDO pool of 300G ( 300 G is a logical size that may be greater than real disk size)
+
+sudo vdo create --name=vdo1 --device=/dev/xvdb --vdoLogicalSize=300G
+
+
+# Check the status of VDO
+ vdostats --hu
+
+
+
+#Creating LVM partitions in VDO to mount it
+
+ Partitioning the VDO Volume using LVM
+
+$ sudo pvcreate /dev/mapper/vdo1
+$ sudo vgcreate vdo1vg /dev/mapper/vdo1
+
+
+
+sudo lvcreate -n vdo1v01 -L 50G vdo1vg
+
+
+# Format with the file system
+sudo mkfs.xfs  -K /dev/vdo1vg/vdo1v01
+
+
+#Mount it
+
+------------------------------------------
+# To stop VDOs
+
+vdo stop -n < vdo name>  or vdo stop --all
+
+
+To remove VDOs
+
+vdo remove -n <vdo name>  or vdo remove  --all
+
+

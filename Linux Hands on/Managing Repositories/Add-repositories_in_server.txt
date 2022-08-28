@@ -1,0 +1,14 @@
+Created by Aswin KS
+
+Add a Repository
+
+
+name=BaseOS
+baseurl=https://abc.com/baseos
+gpgcheck=0
+enabled=1
+
+name=Appstream
+baseurl=https://xyz.com/appstream
+gpgcheck=0
+enabled=1

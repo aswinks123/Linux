@@ -1,0 +1,18 @@
+Created by Aswin KS
+
+Extending the size of LV
+
+
+Run the command to extend it online
+
+->lvextend -L +1.5G  /dev/mapper/myvg-datalv1  (This command will add +1.5GB to existing LV "datalv1)
+
+Note: +1.5G  will add an extra 1.5 GB to the patrtition
+
+Resize the file system
+
+-> resize2fs -f /dev/mapper/myvg-datalv1  (Inorder to reflect the change we have to extend the file system too.)
+
+------------------------------------------------------------------------------
+
+Note: For extending the size first add LV and then File system

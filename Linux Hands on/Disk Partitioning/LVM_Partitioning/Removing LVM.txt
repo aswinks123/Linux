@@ -1,0 +1,18 @@
+Created by Aswin KS
+
+
+How to remove entire LVM and all LVs,VGs,PVs
+
+1.Unmount the lvs   # unount <lv name>
+
+2.lvchange -an <device path>
+
+3.lvremove <lvpath>
+
+4.vgremove <vgname>
+
+5.pvremove <disk path/partition path>
+
+
+Note: Remove fstab entry of this LV from /etc/fstab inorder to avoid booting issues
+

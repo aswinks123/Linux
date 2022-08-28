@@ -1,0 +1,46 @@
+Created by Aswin KS
+
+# To tar files using tar utility
+
+
+->  tar -cvf   <name of the new tar file to be created.tar>  < source files/directory>
+
+eg : tar -cvf abc.tar  a b c 
+
+
+# To open a tar file with out extracting it
+
+-> tar -tf <tar name>
+
+
+# To Extract tar file
+
+-> tar -xf <tar name>
+
+
+
+
+
+
+
+c: cretae
+v:view
+f:files
+x:extract
+
+--------------------------------------------------------------------------------
+
+				*********Compression******************
+				
+# To archive and compress a file/folder
+
+-> tar -cvf<a/z>  <newfilename.tar.gz>  < source files>
+
+EG: tar cvfz abc.tar.gz  a b c
+
+a: auto select compression technique based on the extension of new file (newfilename.tar.gz)
+z: To use gzip manually
+
+
+
+

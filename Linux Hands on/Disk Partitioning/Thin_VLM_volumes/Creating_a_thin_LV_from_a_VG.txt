@@ -1,0 +1,30 @@
+#Creating the thin pool
+
+lvcreate -v -L <100m> -T <VG name>  -n < thinpool name>
+
+syntax: (lvcreate –L <Size_of_pool> -T <volume_group>/<thin_pool_name>)
+
+
+#Creating LV in that thin pool
+
+lvcreate -V 1G -T volgrp/lvpool  -n <name of first LV)  #  first lv
+lvcreate -V 2G -T volgrp/lvpool  -n <name of first LV)  # Second lv
+
+
+# Format the LVs
+
+mkfs.ext4 /dev/vg/lvname
+
+
+Note: mount it like normal file system
+
+---------------------------------------------------------
+
+
+# Extending Thin LV
+
+lvextend -L +5G /volgrp/lvname
+
+
+
+Note: We cannot reduce the size of a thin LV

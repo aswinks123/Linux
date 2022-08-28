@@ -1,0 +1,34 @@
+Created by Aswin KS
+
+This documentation is to create SSL certificate and assign to nginx server(We can also attach the SSL certificate to any other webservers)
+
+
+# Create key and cert file using open SSL
+
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt #general syntax,replace .key and ..cert file name as you wish
+
+# Creating a diffi helman group #it is a strong key exchange algorithm
+
+sudo openssl dhparam -out /etc/nginx/dhparam.pem 4096
+
+#Creating a new config file for nginx
+
+vi /etc/nginx/sites-enabled/aswin.conf (Replace aswin.conf to what ever you wish to have)
+
+# Add the following details in it  /etc/nginx/sites-enabled/aswin.conf
+server {
+  listen 443;
+  server_name our-domain.com; # Give correct name
+
+  root /var/www;
+  index index.html index.htm;
+
+  ssl on;
+  ssl_certificate /etc/nginx/ssl/server.crt;  # Give correct path
+  ssl_certificate_key /etc/nginx/ssl/server.key; # Give correct path
+}
+
+
+#Restart the nginx service
+
+sudo service nginx restart   

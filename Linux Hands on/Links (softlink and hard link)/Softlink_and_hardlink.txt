@@ -1,0 +1,37 @@
+Created by Aswin KS
+
+Softlink and hardlink
+
+
+#Hard link
+
+-> ln /tmp/vsftpd.conf  shortcut-vsftps1
+
+use ln command
+It is a shorcut to a file.
+if source is removed all shortcut will be invalid
+Hard link cannot link to a directory
+Hard link cannot link to files in another mount
+Hard link will not delete even if original file is removed.
+
+
+
+
+
+#Softlink
+
+ln -s  /tmp/vsftpd.conf  shortcut-vsftps1
+use ln -s command
+
+"If original file is removed softlink will broke"
+
+
+
+Difference between hard link anc copy command:
+
+Changes made to a hard link will reflect in source file as well as all other hard links  as inode is same
+
+BUT
+
+changes made to a copy will only affext that particular file as i node is different
+
