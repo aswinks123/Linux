@@ -1,6 +1,0 @@
-# To change default mode to multi user mode
-
-systemctl set-default multi-user.target
-
-# To see the current run level
-systemctl get-default
