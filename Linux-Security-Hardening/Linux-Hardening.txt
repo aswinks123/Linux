@@ -1,0 +1,57 @@
+
+1. Keep Your System Updated
+
+
+# Debian/Ubuntu
+sudo apt update && sudo apt upgrade -y
+
+# RHEL/CentOS
+sudo yum update -y
+
+# Arch Linux
+sudo pacman -Syu
+--------------------------------------------------------------------------------------------------------
+
+ 2. Create a Limited User (Disable Root Login)
+
+sudo nano /etc/ssh/sshd_config
+add the line:
+PermitRootLogin no
+sudo systemctl restart ssh
+--------------------------------------------------------------------------------------------------------
+
+3. Configure a Firewall (UFW)
+
+sudo ufw enable
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow 22/tcp  # Allow SSH
+sudo ufw allow 80/tcp  # Allow HTTP
+sudo ufw allow 443/tcp # Allow HTTPS
+sudo ufw status verbose
+--------------------------------------------------------------------------------------------------------
+
+4. Disable Unused Services
+
+sudo systemctl list-units --type=service
+sudo systemctl stop apache2  # Stop Apache (if unused)
+sudo systemctl disable apache2
+sudo systemctl mask apache2  # Prevent it from starting
+--------------------------------------------------------------------------------------------------------
+
+ 5. Secure SSH (Change Port & Use Key-Based Auth)
+
+sudo nano /etc/ssh/sshd_config
+Port 22  # Default ----> Port 2222  # Choose a different port
+sudo systemctl restart ssh
+
+
+PasswordAuthentication no
+--------------------------------------------------------------------------------------------------------
+ 6. Disable USB Devices
+
+
+
+
+
+
