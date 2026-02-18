@@ -1,4 +1,4 @@
-# NMCLI Daily Admin Cheat Sheet
+# NMCLI Commands: Manage Networking
 
 | Task | Command | Notes |
 |------|---------|-------|
