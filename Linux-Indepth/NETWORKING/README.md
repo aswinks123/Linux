@@ -152,4 +152,61 @@ Also check the current IP (192.168.122.50/24) of the interface. It matches the o
 
 ```
 
+### Step 5: Deactivate a profile 
 
+nmcli connection down <profile name>
+
+
+What it does:
+
+Temporarily disconnects a profile from its interface
+
+The interface becomes inactive (disconnected)
+
+Settings (IP, gateway, DNS) from that profile are no longer applied
+
+Useful for troubleshooting or switching profiles
+
+
+### Step 6: Connect to WiFi
+
+First lets scan the available wifi
+
+```
+aswin@Aswin-HP:~$ nmcli device wifi list
+IN-USE  BSSID              SSID                MODE   CHAN  RATE        SIGNAL  BARS  SECURITY    
+        D2:28:68:DB:DD:72  Samsung Galaxy S23  Infra  1     130 Mbit/s  100     ▂▄▆█  WPA2        
+        C6:4F:D5:EE:BC:D9  ROGERSNEW           Infra  6     260 Mbit/s  100     ▂▄▆█  WPA2 WPA3   
+        C6:4F:D5:EE:BC:DE  --                  Infra  6     260 Mbit/s  100     ▂▄▆█  WPA2 802.1X 
+        C6:4F:D5:EE:BC:DA  --                  Infra  6     260 Mbit/s  100     ▂▄▆█  WPA2        
+*       C6:4F:D5:F5:BC:DA  ROGERSNEW           Infra  44    540 Mbit/s  97      ▂▄▆█  WPA2 WPA3   
+        C6:4F:D5:F5:BC:DD  --                  Infra  44    540 Mbit/s  95      ▂▄▆█  WPA2        
+        C6:4F:D5:F5:BC:DF  --                  Infra  44    540 Mbit/s  94      ▂▄▆█  WPA2 802.1X 
+        3A:B7:F1:BB:C5:45  Ecto-1              Infra  6     130 Mbit/s  62      ▂▄▆_  WPA2        
+        BE:D5:ED:FB:3F:87  84 Legends Bell     Infra  44    540 Mbit/s  62      ▂▄▆_  WPA2        
+        BC:D5:ED:FB:3F:86  --                  Infra  44    540 Mbit/s  62      ▂▄▆_  WPA2        
+        5A:B7:F1:BB:C5:45  --                  Infra  6     130 Mbit/s  60      ▂▄▆_  WPA2        
+        2A:B7:F1:BB:C5:45  --                  Infra  6     130 Mbit/s  60      ▂▄▆_  WPA2        
+        BC:D5:ED:FB:3F:85  84 Legends Bell     Infra  11    540 Mbit/s  59      ▂▄▆_  WPA2   
+
+```
+
+Now let's connect to wifi: Samsung Galaxy S23
+
+```
+aswin@Aswin-HP:~$ nmcli device wifi connect "Samsung Galaxy S23" password MyPassword-123'
+
+Device 'wlx6083e7b7ae0e' successfully activated with 'b9f7803a-b094-4c86-bf1b-996c0ca8532a'.
+```
+
+Verify the connnection: 
+
+```
+aswin@Aswin-HP:~$ nmcli device status
+DEVICE           TYPE      STATE                   CONNECTION         
+wlx6083e7b7ae0e  wifi      connected               Samsung Galaxy S23 
+lo               loopback  connected (externally)  lo                 
+br-4c65901e7e2e  bridge    connected (externally)  br-4c65901e7e2e    
+br-f7a07f80b68a  bridge    connected (externally)  br-f7a07f80b68a    
+```
+Great!, Now our wifi is connected to new network.
