@@ -1,4 +1,4 @@
-# NMCLI Daily Admin Cheat Sheet
+# NMCLI Daily Admin Commands
 
 | Category | Command | Purpose / Notes |
 |----------|---------|----------------|
