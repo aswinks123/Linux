@@ -154,8 +154,9 @@ Also check the current IP (192.168.122.50/24) of the interface. It matches the o
 
 ### Step 5: Deactivate a profile 
 
+```
 nmcli connection down <profile name>
-
+```
 
 What it does:
 
@@ -204,9 +205,100 @@ Verify the connnection:
 ```
 aswin@Aswin-HP:~$ nmcli device status
 DEVICE           TYPE      STATE                   CONNECTION         
-wlx6083e7b7ae0e  wifi      connected               Samsung Galaxy S23 
+  wifi      connected               Samsung Galaxy S23 
 lo               loopback  connected (externally)  lo                 
 br-4c65901e7e2e  bridge    connected (externally)  br-4c65901e7e2e    
 br-f7a07f80b68a  bridge    connected (externally)  br-f7a07f80b68a    
 ```
 Great!, Now our wifi is connected to new network.
+
+To disconnect wifi:   nmcli device disconnect wlx6083e7b7ae0e
+
+### 7: Bring interface up/down
+
+```
+nmcli device connect <interface>   # Bring interface up
+
+nmcli device disconnect <interface> # Bring interface down
+
+```
+Let's try it:
+
+```
+[root@RHEL ~]# nmcli device status
+DEVICE  TYPE      STATE      CONNECTION 
+enp1s0  ethernet  connected  enp1s0     
+lo      loopback  connected  lo      
+
+#Disconnecting enp1s0
+
+[root@RHEL ~]# nmcli device disconnect enp1s0
+Device 'enp1s0' successfully disconnected.
+
+
+#Check status again
+
+[root@RHEL ~]# nmcli device status
+DEVICE  TYPE      STATE         CONNECTION 
+lo      loopback  connected     lo         
+enp1s0  ethernet  disconnected  -- 
+
+```
+
+### nmcli connection down vs nmcli connection down
+
+*** nmcli connection down <profile> ***
+
+Deactivates a profile, not the hardware.
+
+Interface stays physically up.
+
+IP, gateway, DNS from the profile are removed.
+
+Useful for switching profiles or resetting settings.
+
+*** nmcli connection down <profile> ***
+
+Disconnects the interface itself.
+
+Interface becomes physically/logically down.
+
+Profile may still exist but cannot apply settings until interface is back up.
+
+Useful for temporarily disabling a NIC or troubleshooting hardware.
+
+
+
+### 8: Create a new Profile and Assign static IP 
+
+Step 1: Create the profile
+
+```
+nmcli connection add type ethernet con-name <profile-name> ifname <interface> ipv4.addresses <IP/prefix> ipv4.gateway <gateway> ipv4.method manual
+
+```
+Step 2: Modify the existnig profile (If needed)
+
+```
+nmcli connection modify <profile> ipv4.addresses <IP/prefix>
+nmcli connection modify <profile> ipv4.gateway <gateway>
+nmcli connection modify <profile> ipv4.method manual
+
+```
+Step 3: Apply the changes
+
+```
+nmcli connection up <profile-name> 
+```
+
+### 9: Switch back to DHCP mode for the profile
+
+```
+nmcli connection modify <profile> ipv4.method auto
+nmcli connection up <profile>
+```
+
+
+
+
+
