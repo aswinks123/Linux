@@ -85,3 +85,67 @@ Shows all saved network profiles on the system
 Includes active and inactive profiles
 
 Shows which device each profile (NAME field is the profile name) is currently applied to
+
+### Step 4: Activate a profile
+
+A profile is a file that contain the configuration that need to be applied to an interface. It contain the details of IP, gateway, etc.
+
+Let's create a sample profile first
+
+```
+[root@RHEL ~]# nmcli connection add type ethernet con-name enp1s0-static ifname enp1s0 ipv4.addresses 192.168.122.50/24 ipv4.gateway 192.168.122.1 ipv4.method manual
+Connection 'enp1s0-static' (12d99f15-c3fc-44aa-afa9-e09387b49b14) successfully added.
+
+
+[root@RHEL ~]# nmcli connection show
+NAME           UUID                                  TYPE      DEVICE 
+enp1s0         0f2152ea-3615-37ab-b592-f0b80143d566  ethernet  enp1s0 
+lo             817beb23-c012-4f7f-8c28-eee1b9981d30  loopback  lo     
+enp1s0-static  12d99f15-c3fc-44aa-afa9-e09387b49b14  ethernet  --  
+
+```
+
+
+enp1s0-static is a new profile we created, with a new IP defined. but as you can see, its not conneced to any devies now.
+
+
+Lets check the current IP of that inteface: (enp1s0: 192.168.122.10/24)
+
+```
+[root@RHEL ~]# ip a | grep enp1s0: -A5
+2: enp1s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 52:54:00:3e:65:8e brd ff:ff:ff:ff:ff:ff
+    altname enx5254003e658e
+    inet 192.168.122.10/24 brd 192.168.122.255 scope global noprefixroute enp1s0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::5054:ff:fe3e:658e/64 scope link noprefixroute 
+```
+
+
+* Now lets activate the new profile:
+
+Note: If you are using an SSH session, it will disconnect the session. Be careful!!
+
+```
+NAME           UUID                                  TYPE      DEVICE 
+enp1s0-static  12d99f15-c3fc-44aa-afa9-e09387b49b14  ethernet  enp1s0 
+lo             817beb23-c012-4f7f-8c28-eee1b9981d30  loopback  lo     
+enp1s0         0f2152ea-3615-37ab-b592-f0b80143d566  ethernet  -- 
+
+```
+As you can see now the active profile is : enp1s0-static 
+
+Also check the current IP (192.168.122.50/24) of the interface. It matches the one we defined in the profile.
+
+```
+2: enp1s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 52:54:00:3e:65:8e brd ff:ff:ff:ff:ff:ff
+    altname enx5254003e658e
+    inet 192.168.122.50/24 brd 192.168.122.255 scope global noprefixroute enp1s0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::2643:67b9:eef8:6788/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+
+```
+
+
