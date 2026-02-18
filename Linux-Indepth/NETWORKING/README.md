@@ -1,6 +1,6 @@
 # NMCLI Commands: Manage Networking
 
-Learn Daily used Networking tasks using nmcli - Network manager commandline tool
+Learn Daily used networking commands using nmcli - Network manager command line tool
 
 
 | Task | Command | Notes |
