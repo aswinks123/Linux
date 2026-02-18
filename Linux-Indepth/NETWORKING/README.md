@@ -303,5 +303,5 @@ nmcli connection up <profile>
 
 
 
-
+## END OF SESSION
 
