@@ -88,9 +88,9 @@ Shows which device each profile (NAME field is the profile name) is currently ap
 
 ### Step 4: Activate a profile
 
-A profile is a file that contain the configuration that need to be applied to an interface. It contain the details of IP, gateway, etc.
+A profile is a file that contains the configuration that need to be applied to an interface. It contain the details of IP, gateway, etc.
 
-Let's create a sample profile first
+Let's create a sample profile named: enp1s0-static with IP address: 192.168.122.50/24 
 
 ```
 [root@RHEL ~]# nmcli connection add type ethernet con-name enp1s0-static ifname enp1s0 ipv4.addresses 192.168.122.50/24 ipv4.gateway 192.168.122.1 ipv4.method manual
@@ -109,7 +109,7 @@ enp1s0-static  12d99f15-c3fc-44aa-afa9-e09387b49b14  ethernet  --
 enp1s0-static is a new profile we created, with a new IP defined. but as you can see, its not conneced to any devies now.
 
 
-Lets check the current IP of that inteface: (enp1s0: 192.168.122.10/24)
+Before we apply this profile, lets check the current IP of the inteface: (enp1s0: 192.168.122.10/24)
 
 ```
 [root@RHEL ~]# ip a | grep enp1s0: -A5
@@ -127,15 +127,19 @@ Lets check the current IP of that inteface: (enp1s0: 192.168.122.10/24)
 Note: If you are using an SSH session, it will disconnect the session. Be careful!!
 
 ```
+
+[root@RHEL ~]# nmcli connection up enp1s0-static
+
+
 NAME           UUID                                  TYPE      DEVICE 
 enp1s0-static  12d99f15-c3fc-44aa-afa9-e09387b49b14  ethernet  enp1s0 
 lo             817beb23-c012-4f7f-8c28-eee1b9981d30  loopback  lo     
 enp1s0         0f2152ea-3615-37ab-b592-f0b80143d566  ethernet  -- 
 
 ```
-As you can see now the active profile is : enp1s0-static 
+As you can see now the active profile is : enp1s0-static which is tied to device: enp1s0
 
-Also check the current IP (192.168.122.50/24) of the interface. It matches the one we defined in the profile.
+Also check the current IP (192.168.122.50/24) of the interface. It matches the one we defined in the new profile.
 
 ```
 2: enp1s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
