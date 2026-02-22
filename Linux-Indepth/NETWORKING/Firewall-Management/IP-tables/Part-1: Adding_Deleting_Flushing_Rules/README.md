@@ -1,4 +1,4 @@
-# IPTABLE : Manage Firewall Rules .  Logs, ordering
+# IPTABLE : Manage Firewall Rules
 
 ### Lab Setup
 

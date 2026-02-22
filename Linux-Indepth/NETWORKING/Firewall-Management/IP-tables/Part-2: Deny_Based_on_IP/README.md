@@ -9,7 +9,7 @@ VM: runs nginx on port 80
 Goal: Block only Host IP address from accessing port 80
 
 
-### Step 1: Check the Hosts IP address
+### Step 1: Check the Host IP address
 
 Command: ip a 
 
