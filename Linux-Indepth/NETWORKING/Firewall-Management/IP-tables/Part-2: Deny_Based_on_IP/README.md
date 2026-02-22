@@ -1,4 +1,4 @@
-# PART 2 - Allow or Deny Traffic From Specific IP Address
+# PART 2 - Deny Traffic From Specific IP Address
 
 ### Lab Setup
 
