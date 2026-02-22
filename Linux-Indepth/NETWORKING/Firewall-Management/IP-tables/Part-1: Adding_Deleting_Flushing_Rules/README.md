@@ -1,4 +1,4 @@
-# IPTABLE : Manage Firewall Rules . Learn to see the logs too
+# IPTABLE : Manage Firewall Rules
 
 ### Lab Setup
 
@@ -11,7 +11,7 @@ Goal: block and unblock VM traffic to host port 80
 
 
 
-## PART1 - ADDING, DELETING, and FLUSHING rules.
+## PART1 - Adding, Deleting, and Flushing Rules.
 
 
 ### Step 1: Check Current Rules
