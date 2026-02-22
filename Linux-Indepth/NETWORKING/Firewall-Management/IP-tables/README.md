@@ -58,3 +58,25 @@ Rules are checked top to bottom
 First match wins - later rules ignored
 
 Default policy applies if no rule matches
+
+
+### Best Practice: Default Deny
+
+By default all traffic are allowed.
+
+
+The recommended approach is “default deny”: set the chain’s default policy to DROP, which blocks all traffic by default, and then explicitly allow only the traffic that is required. This minimizes the attack surface, ensures that unexpected traffic is automatically blocked, and enforces strict control over network access. For example, allow SSH from trusted IPs or HTTP from specific VMs while everything else is denied automatically.
+
+Example:
+
+```
+
+# DENY all incoming traffic
+
+sudo iptables -P INPUT DROP
+
+
+# Allow only required traffic 
+
+sudo iptables -A INPUT -p tcp -s 192.168.122.2 --dport 22 -j ACCEPT   # allow SSH
+```
